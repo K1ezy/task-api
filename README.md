@@ -323,3 +323,18 @@ Protected CRUD Operations
 ```
 
 This progression demonstrates fundamental backend development concepts including REST API design, database persistence, application architecture, authentication, middleware, and API testing.
+
+
+
+# NEW UPDATE
+## Architecture & Refactoring Summary
+
+### Model-View-Controller (MVC) Pattern
+The backend has been refactored into a clean MVC architecture to ensure strict separation of concerns:
+
+- **`models/Tasks.js` (Model Layer)**: Handles all direct database operations and raw SQL queries (`SELECT`, `INSERT`, `UPDATE`, `DELETE`) using MySQL connection pools.
+- **`controllers/taskController.js` (Controller Layer)**: Purely responsible for processing HTTP requests, validating input parameters, invoking Model methods, and returning formatted JSON responses.
+- **`server.js` (Entry Point)**: Registers middleware, connects to the database pool, and maps API endpoints to controller actions.
+- **`middleware/authenticateToken.js`**: Protects mutation endpoints (`POST`, `PUT`, `DELETE`) by validating JWT Bearer tokens.
+- **`utils.js`**: Utility helper functions for consistent JSON formatting across responses.
+  
